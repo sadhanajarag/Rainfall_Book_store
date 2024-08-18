@@ -1,0 +1,61 @@
+Class BookStore:
+    Method __init__:
+        # Initialize the BookStore with no books purchased
+        Set number_of_books_purchased to 0
+
+    Method monthly_purchase:
+        # Define valid book purchase values
+        Set valid_values to the set {0, 2, 4, 6, 8}
+
+        Loop indefinitely:
+            Try:
+                # Prompt user to enter the number of books purchased this month
+                Prompt user with "Enter the number of books purchased this month:"
+                Read input and convert to integer
+                Set book_purchased_this_month to the integer value
+
+                # Check if the number of books is valid
+                If book_purchased_this_month is less than 0:
+                    Raise a ValueError with message "The number of books must be a positive number."
+
+                If book_purchased_this_month is not in valid_values and book_purchased_this_month is less than 8:
+                    Raise a ValueError with message "The number of books must be 0, 2, 4, 6, 8 or more."
+
+                # Return valid number of books purchased
+                Return book_purchased_this_month
+
+            Except ValueError as e:
+                # Handle invalid input and prompt the user again
+                Print "Invalid input: [error message]. Please enter a valid number."
+
+    Method display_award:
+        # Get the number of books purchased this month
+        Set book_purchase to the result of calling monthly_purchase
+
+        # Determine and display the points based on the number of books purchased
+        If book_purchase is 0:
+            Print "Points earned: 0 for books purchased: [book_purchase]"
+
+        Else if book_purchase is 2:
+            Print "Points earned: 5 for books purchased: [book_purchase]"
+
+        Else if book_purchase is 4:
+            Print "Points earned: 15 for books purchased: [book_purchase]"
+
+        Else if book_purchase is 6:
+            Print "Points earned: 30 for books purchased: [book_purchase]"
+
+        Else if book_purchase is greater than or equal to 8:
+            Print "Points earned: 60 for books purchased: [book_purchase]"
+
+Function main:
+    # Create an instance of the BookStore class
+    Create a BookStore object named bookstore
+
+    # Display the points awarded based on the number of books purchased
+    Call bookstore.display_award
+
+# Entry point of the program
+If this file is run as the main program:
+    # Execute the main function
+    Call main
