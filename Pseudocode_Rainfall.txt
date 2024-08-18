@@ -1,0 +1,86 @@
+Class RainfallCalculator:
+    Method __init__:
+        # Initialize the RainfallCalculator with default values
+        Set total_month to 0
+        Set total_rainfall to 0.0
+        Set month_names to the list ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    Method get_data:
+        # Prompt user for the number of years and validate input
+        Loop indefinitely:
+            Try:
+                # Read the number of years from user input and convert to integer
+                Prompt user with "Enter the number of years:"
+                Read input and convert to integer
+                Set num_year to the integer value
+
+                # Validate the number of years
+                If num_year is less than or equal to 0:
+                    Raise a ValueError with message "Number of year must be positive number"
+
+                # Return the number of years
+                Return num_year
+
+            Except ValueError as e:
+                # Handle invalid input and prompt the user again
+                Print "Invalid input: [error message]"
+
+    Method collect_data:
+        # Collect rainfall data from the user
+        Set num_years to the result of calling get_data
+
+        # Outer loop for each year
+        For each year from 1 to num_years:
+            Print "Year: [current year]:"
+
+            # Inner loop for each month
+            For each month in month_names:
+                Loop indefinitely:
+                    Try:
+                        # Prompt the user for rainfall data for the current month
+                        Prompt user with "Enter inches of rainfall for month [month]:"
+                        Read input and convert to float
+                        Set rainfall to the float value
+
+                        # Validate the rainfall amount
+                        If rainfall is less than 0:
+                            Raise a ValueError with message "Rainfall cannot be negative"
+
+                        # Exit the loop if valid input
+                        Break
+
+                    Except ValueError as e:
+                        # Handle invalid input and prompt the user again
+                        Print "Invalid input: [error message]"
+
+                # Accumulate total rainfall and count the months
+                Add rainfall to total_rainfall
+                Increment total_month by 1
+
+    Method calculate_avg_rainfall:
+        # Calculate the average rainfall per month
+        If total_month is greater than 0:
+            Set average_rainfall to total_rainfall divided by total_month
+        Else:
+            Set average_rainfall to 0.0
+
+        # Return the average rainfall
+        Return average_rainfall
+
+    Method display_results:
+        # Display the total number of months, total inches of rainfall, and average rainfall
+        Set average_rainfall to the result of calling calculate_avg_rainfall
+        Print "Total number of months: [total_month]"
+        Print "Total inches of rainfall: [total_rainfall, formatted to 2 decimal places]"
+        Print "Average rainfall per month: [average_rainfall, formatted to 2 decimal places]"
+
+Function main:
+    # Main function to run the RainfallCalculator program
+    Create a RainfallCalculator object named calculator
+    Call calculator.collect_data to gather rainfall data
+    Call calculator.display_results to display the results
+
+# Entry point of the program
+If this file is run as the main program:
+    # Execute the main function
+    Call main
